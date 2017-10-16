@@ -8,15 +8,21 @@
 /**
  * Simple Tic Tac Toe Game
  *
- * Game table row is stored in the "host" scope with "challenger" as the key
- * Therefore, each pair of accounts can have 2 unique game (where one become host and the other become challenger)
+ * For the following tic-tac-toe game:
+ * - Each pair of player can have 2 unique game, one where player_1 become host and player_2 become challenger and vice versa
+ * - The game data is stored in the "host" scope and use the "challenger" as the key
  *
  * 0,0 coordinate is on the top left corner of the board
  *   | 0 | 1 | 2
- * 0 | - | o | x
- * 1 | - | x | -
- * 2 | x | o | o
- * x represents the host and o represents the challenger, host makes the first move
+ * 0 | - | o | x 
+ * 1 | - | x | - 
+ * 2 | x | o | o 
+ * 
+ * Board is represented with number:
+ * - 0 represents empty cell
+ * - 1 represents cell filled by host 
+ * - 2 represents cell filled by challenger
+ * Therefore, assuming x is host, the above board will have the following representation: [0, 2, 1, 0, 1, 0, 1, 2, 2] inside the game object
  */
 
 using namespace eos;
@@ -24,17 +30,30 @@ namespace tic_tac_toe {
 
   struct Game {
     Game() {};
-    Game(AccountName challenger, AccountName host):challenger(challenger), host(host), turn(host), winner(N(none)) {
+    Game(AccountName challenger, AccountName host):challenger(challenger), host(host), turn(host) {
       // Initialize board
-      for(int i = 0; i < 9; i++) {
-        board[i] = N(-);
-      }
+      initialize_board();
     };
-    AccountName   challenger; // use challenger as the key
-    AccountName   host;
-    AccountName   turn; // host/ challenger
-    AccountName   winner; // none/ draw/ host/ challenger
-    uint64_t      board[9]; // use 1d array since 2d array is not yet supported
+    AccountName     challenger; // this also acts as key of the table
+    AccountName     host;
+    AccountName     turn; // = account name of host/ challenger
+    AccountName     winner = N(none); // = none/ draw/ account name of host/ challenger
+    uint8_t         board_len = 9;
+    uint8_t         board[9]; // 
+
+    // Initialize board with empty cell
+    void initialize_board() {
+      for (uint8_t i = 0; i < board_len ; i++) {
+        board[i] = 0;
+      }
+    }
+
+    // Reset game
+    void reset_game() {
+      initialize_board();
+      turn = host;
+      winner = N(none);
+    }
   };
 
   // Create new game
@@ -50,7 +69,7 @@ namespace tic_tac_toe {
     AccountName   by;
   };
 
-  // Make movement
+  // Movement
   struct Movement {
     uint32_t    row;
     uint32_t    column;
@@ -64,5 +83,6 @@ namespace tic_tac_toe {
     Movement      movement;
   };
 
-  using Games = Table<N(tic.tac.toe),N(tic.tac.toe),N(game),Game,uint64_t>;
+  // Table to store list of games
+  using Games = Table<N(tictactoe),N(tictactoe),N(games),Game,uint64_t>;
 }

@@ -12,7 +12,7 @@
         "host": "AccountName",
         "turn": "AccountName",
         "winner": "AccountName",
-        "board": "UInt64[]"
+        "board": "UInt8[]"      
       }
     },{
       "name": "create",
@@ -59,7 +59,7 @@
     }
   ],
   "tables": [{
-        "table": "game",
+        "table": "games",
         "type": "game",
         "indextype": "i64",
         "keynames" : ["challenger"],
