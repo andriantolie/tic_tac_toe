@@ -29,7 +29,7 @@
 using namespace eos;
 namespace tic_tac_toe {
 
-  struct Game {
+  struct PACKED(Game) {
     Game() {};
     Game(AccountName challenger, AccountName host):challenger(challenger), host(host), turn(host) {
       // Initialize board
@@ -68,6 +68,12 @@ namespace tic_tac_toe {
     AccountName   challenger;
     AccountName   host;
     AccountName   by;
+  };
+
+  // Close the game
+  struct Close {
+    AccountName   challenger;
+    AccountName   host;
   };
 
   // Movement

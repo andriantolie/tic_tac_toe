@@ -99,6 +99,17 @@ namespace tic_tac_toe {
     Games::update(game, game.host);
   }
 
+  void apply_close(const Close& close) {
+    requireAuth(close.host);
+
+    // Check if game exists
+    Game game;
+    bool game_exists = Games::get(close.challenger, game, close.host);
+    assert(game_exists == true, "game doesn't exist!");
+
+    Games::remove(game, game.host);
+  }
+
   void apply_move(const Move& move) {
     requireAuth(move.by);
 
@@ -127,6 +138,7 @@ namespace tic_tac_toe {
       game.board[move.movement.row * 3 + move.movement.column] = 2;
       game.turn = game.host;
     }
+    // Update winner
     game.winner = get_winner(game);
     Games::update(game, game.host);
   }
@@ -155,6 +167,8 @@ extern "C" {
         tic_tac_toe::apply_create(currentMessage<tic_tac_toe::Create>());
       } else if (action == N(restart)) {
         tic_tac_toe::apply_restart(currentMessage<tic_tac_toe::Restart>());
+      } else if (action == N(close)) {
+        tic_tac_toe::apply_close(currentMessage<tic_tac_toe::Close>());
       } else if (action == N(move)) {
         tic_tac_toe::apply_move(currentMessage<tic_tac_toe::Move>());
       }

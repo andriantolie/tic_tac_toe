@@ -30,6 +30,13 @@
         "by": "AccountName"
       }
     },{
+      "name": "close",
+      "base": "",
+      "fields": {
+        "challenger": "AccountName",
+        "host": "AccountName"
+      }
+    },{
       "name": "movement",
       "base": "",
       "fields": {
@@ -53,6 +60,9 @@
     },{
       "action": "restart",
       "type": "restart"
+    },{
+      "action": "close",
+      "type": "close"
     },{
       "action": "move",
       "type": "move"
