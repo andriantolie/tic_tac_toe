@@ -6,7 +6,8 @@
 #include <eoslib/db.hpp>
 
 /**
- * Simple Tic Tac Toe Game
+ * Sample Contract
+ * Tic Tac Toe Game
  *
  * For the following tic-tac-toe game:
  * - Each pair of player can have 2 unique game, one where player_1 become host and player_2 become challenger and vice versa
