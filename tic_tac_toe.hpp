@@ -34,6 +34,13 @@
  *  - Create an account called tic.tac.toe
  *  - Add tic.tac.toe key to your wallet
  *  - Set the contract on the tic.tac.toe account
+ * 
+ *  How to play the game:
+ *  - Create a game using `create` action, with you as the host and other account as the challenger.
+ *  - The first move needs to be done by the host, use the `move` action to make a move by specifying which row and column to fill.
+ *  - Then ask the challenger to make a move, after that it's back to the host turn again, repeat until the winner is determined.
+ *  - If you want to restart the game, use the `restart` action
+ *  - If you want to clear the game from the database to save up some space after the game has ended, use the `close` action
  *  @{
  */
 
@@ -84,7 +91,7 @@ namespace tic_tac_toe {
   struct Restart {
     AccountName   challenger;
     AccountName   host;
-    AccountName   by;
+    AccountName   by; // the account who wants to restart the game
   };
 
   /**
@@ -109,8 +116,8 @@ namespace tic_tac_toe {
   struct Move {
     AccountName   challenger;
     AccountName   host;
-    AccountName   by;
-    Movement      movement;
+    AccountName   by; // the account who wants to make the move
+    Movement      movement; 
   };
 
   /**
