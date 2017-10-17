@@ -6,21 +6,35 @@
 
 namespace tic_tac_toe {
   using namespace eos;
-
-  // Check if cell is empty
+  /**
+   * @brief Check if cell is empty
+   * @param cell - value of the cell (should be either 0, 1, or 2)
+   * @return true if cell is empty
+   */
   bool is_empty_cell(const uint8_t& cell) {
     return cell == 0;
   }
 
-  // Check for valid movement
-  // Which is inside the board and is done on empty cell
+  /**
+   * @brief Check for valid movement
+   * @detail Movement is considered valid if it is inside the board and done on empty cell
+   * @param movement - the movement made by the player
+   * @param game - the game on which the movement is being made
+   * @return true if movement is valid
+   */
   bool is_valid_movement(const Movement& movement, const Game& game) {
     uint32_t movement_location = movement.row * 3 + movement.column;
     bool is_valid = movement_location < game.board_len && is_empty_cell(game.board[movement_location]);
     return is_valid;
   }
 
-  // Get winner of the game
+
+  /**
+   * @brief Get winner of the game
+   * @detail Winner of the game is the first player who made three consecutive aligned movement
+   * @param game - the game which we want to determine the winner of
+   * @return winner of the game (can be either none/ draw/ account name of host/ account name of challenger)
+   */
   AccountName get_winner(const Game& game) {
     if((game.board[0] == game.board[4] && game.board[4] == game.board[8]) ||
        (game.board[1] == game.board[4] && game.board[4] == game.board[7]) ||
@@ -69,6 +83,10 @@ namespace tic_tac_toe {
     return N(none);
   }
 
+  /**
+   * @brief Apply create action
+   * @param create - action to be applied
+   */
   void apply_create(const Create& create) {
     requireAuth(create.host);
     assert(create.challenger != create.host, "challenger shouldn't be the same as host");
@@ -82,6 +100,10 @@ namespace tic_tac_toe {
     Games::store(game, create.host);
   }
 
+  /**
+   * @brief Apply restart action
+   * @param restart - action to be applied
+   */
   void apply_restart(const Restart& restart) {
     requireAuth(restart.by);
 
@@ -99,6 +121,10 @@ namespace tic_tac_toe {
     Games::update(game, game.host);
   }
 
+  /**
+   * @brief Apply close action
+   * @param close - action to be applied
+   */
   void apply_close(const Close& close) {
     requireAuth(close.host);
 
@@ -110,6 +136,10 @@ namespace tic_tac_toe {
     Games::remove(game, game.host);
   }
 
+  /**
+   * @brief Apply move action
+   * @param move - action to be applied
+   */
   void apply_move(const Move& move) {
     requireAuth(move.by);
 
