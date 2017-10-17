@@ -29,6 +29,11 @@
  *  - 1 represents cell filled by host 
  *  - 2 represents cell filled by challenger
  *  Therefore, assuming x is host, the above board will have the following representation: [0, 2, 1, 0, 1, 0, 1, 2, 2] inside the game object
+ * 
+ *  In order to deploy this contract:
+ *  - Create an account called tic.tac.toe
+ *  - Add tic.tac.toe key to your wallet
+ *  - Set the contract on the tic.tac.toe account
  *  @{
  */
 
