@@ -24,7 +24,7 @@
  (data (i32.const 192) "the game has ended!\00")
  (data (i32.const 224) "it\'s not your turn yet!\00")
  (data (i32.const 256) "not a valid movement!\00")
- (data (i32.const 288) "tictactoe\00")
+ (data (i32.const 288) "tic.tac.toe\00")
  (data (i32.const 304) "create\00")
  (data (i32.const 320) "message shorter than expected\00")
  (data (i32.const 352) "restart\00")
@@ -893,7 +893,7 @@
        )
       )
      )
-     (i64.const -3778076832976338944)
+     (i64.const -3778506236080876544)
      (i64.const 7035937633859534848)
      (i32.add
       (get_local $8)
@@ -1267,7 +1267,7 @@
      (i64.load offset=8
       (get_local $0)
      )
-     (i64.const -3778076832976338944)
+     (i64.const -3778506236080876544)
      (i64.const 7035937633859534848)
      (get_local $8)
      (i32.const 42)
@@ -1686,7 +1686,7 @@
        (i32.const 8)
       )
      )
-     (i64.const -3778076832976338944)
+     (i64.const -3778506236080876544)
      (i64.const 7035937633859534848)
      (get_local $7)
      (i32.const 42)
@@ -1893,7 +1893,7 @@
      (i64.load offset=8
       (get_local $0)
      )
-     (i64.const -3778076832976338944)
+     (i64.const -3778506236080876544)
      (i64.const 7035937633859534848)
      (get_local $10)
      (i32.const 42)
@@ -2256,7 +2256,7 @@
         (br_if $label$5
          (i64.gt_u
           (get_local $5)
-          (i64.const 8)
+          (i64.const 10)
          )
         )
         (br_if $label$4
@@ -2287,7 +2287,7 @@
         (i64.const 0)
        )
        (br_if $label$2
-        (i64.le_u
+        (i64.eq
          (get_local $5)
          (i64.const 11)
         )
@@ -2345,10 +2345,10 @@
      (i32.const 1)
     )
    )
-   (set_local $5
+   (set_local $4
     (i64.add
-     (get_local $5)
-     (i64.const 1)
+     (get_local $4)
+     (i64.const -5)
     )
    )
    (set_local $6
@@ -2359,13 +2359,13 @@
    )
    (br_if $label$0
     (i64.ne
-     (tee_local $4
+     (tee_local $5
       (i64.add
-       (get_local $4)
-       (i64.const -5)
+       (get_local $5)
+       (i64.const 1)
       )
      )
-     (i64.const -6)
+     (i64.const 13)
     )
    )
   )

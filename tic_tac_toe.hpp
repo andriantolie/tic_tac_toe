@@ -6,7 +6,7 @@
 #include <eoslib/db.hpp>
 
 /**
- *  @defgroup tictactoecontrac Tic Tac Toe Contract
+ *  @defgroup tictactoecontract Tic Tac Toe Contract
  *  @brief Defines the PvP tic tac toe contract example
  *  @ingroup examplecontract
  *  
@@ -111,6 +111,6 @@ namespace tic_tac_toe {
   /**
    * @brief Table to store list of games
    */ 
-  using Games = Table<N(tictactoe),N(tictactoe),N(games),Game,uint64_t>;
+  using Games = Table<N(tic.tac.toe),N(tic.tac.toe),N(games),Game,uint64_t>;
 }
 /// @}

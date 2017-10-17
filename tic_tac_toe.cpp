@@ -192,7 +192,7 @@ extern "C" {
 
   /// The apply method implements the dispatch of events to this contract
   void apply( uint64_t code, uint64_t action ) {
-    if (code == N(tictactoe)) {
+    if (code == N(tic.tac.toe)) {
       if (action == N(create)) {
         tic_tac_toe::apply_create(currentMessage<tic_tac_toe::Create>());
       } else if (action == N(restart)) {
