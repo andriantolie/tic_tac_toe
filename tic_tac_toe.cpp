@@ -4,7 +4,7 @@
 */
 #include <tic_tac_toe.hpp>
 
-
+// Some comments
 namespace tic_tac_toe {
   using namespace eos;
   /**
